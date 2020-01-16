@@ -32,7 +32,7 @@ int main(void)
                         (1u << TCA0_SINGLE_CTRLA_ENABLE_Pos);       // enable
 
     /* interrupts */
-    sei();
+    sei();  // enable global interrupts
 
     while (1) 
     {
