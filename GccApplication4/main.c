@@ -3,7 +3,14 @@
  *
  * Created: 1/14/2020 11:46:36 AM
  * Author : Kevin
- */ 
+ */
+
+ /*
+ cd C:\Users\Kevin\Documents\pyupdi repo\pyupdi
+ python pyupdi.py -c COM4 -d tiny412 -fs
+ python pyupdi.py -c COM4 -d tiny412 -r
+ python pyupdi.py -c COM4 -d tiny412 -f "C:\Users\Kevin\Documents\Atmel Studio\7.0\GccApplication4\GccApplication4\Release\GccApplication4.hex"
+  */
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -19,12 +26,15 @@
 #define TWI_MCTRLA_RIEN_Pos             7
 #define TWI_MCTRLA_WIEN_Pos             6
 #define TWI_MCTRLA_ENABLE_Pos           0
+#define TWI_MSTATUS_BUSSTATE_Pos        0
 
 int main(void)
 {
     /* PORT */
     PORTA.DIRSET = (1u << PORT3);
     PORTA.OUTSET = (1u << PORT3);
+
+    // TWI pins should be automatically configured when enabling the TWI
 
     /*  
      *  CLK_PER runs at 3.33MHz by default
@@ -47,12 +57,15 @@ int main(void)
 
     TWI0.MCTRLA = (1 << TWI_MCTRLA_RIEN_Pos) |                      // enable master read interrupt
                   (1 << TWI_MCTRLA_WIEN_Pos);                       // enable master write interrupt
+
+    TWI0.MSTATUS = (0x1 << TWI_MSTATUS_BUSSTATE_Pos);               // force from unknown state (on startup) to idle
+
     TWI0.MCTRLA |= (1 << TWI_MCTRLA_ENABLE_Pos);                    // enable
 
     /* interrupts */
     sei();  // enable global interrupts
 
-
+    TWI0.MADDR = (0x68 << 1) | 0x0;                                 // write to BMG250
 
     while (1) 
     {
@@ -67,5 +80,8 @@ ISR(TCA0_OVF_vect)
 
 ISR(TWI0_TWIM_vect)
 {
-    
+    if (TWI0.MSTATUS & (1<<1))
+    {
+        while(1);
+    }
 }
