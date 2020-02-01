@@ -82,6 +82,7 @@ int main(void)
              */
             uint16_t gyrodatax = (gyrodata[0] | (gyrodata[1] << 8));
 
+            // TODO: figure out why right-shifting by more than 4 causing problems
             dac_convert((uint8_t)((gyrodatax >> 4) + 128));
                         
             //PORTA.OUTTGL = (1u << PORT3);  // toggle LED
