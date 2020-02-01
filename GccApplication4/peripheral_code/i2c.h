@@ -13,17 +13,18 @@
 #include <avr/interrupt.h>
 #include "../misc_defs.h"
 
-#define TWI_CTRLA_SDASETUP_Pos          4
-#define TWI_CTRLA_SDAHOLD_Pos           2
-#define TWI_CTRLA_FMPEN_Pos             1
-#define TWI_MCTRLA_RIEN_Pos             7
-#define TWI_MCTRLA_WIEN_Pos             6
-#define TWI_MCTRLA_QCEN_Pos             4
-#define TWI_MCTRLA_ENABLE_Pos           0
-#define TWI_MCTRLB_ACKACT_Pos           2
-#define TWI_MCTRLB_CMD_Pos              0
-#define TWI_MSTATUS_BUSSTATE_Msk        0x3
-#define TWI_MSTATUS_BUSSTATE_Pos        0
+//#define TWI_CTRLA_SDASETUP_Pos TWI_SDASETUP_bp
+//#define TWI_CTRLA_SDASETUP_Pos          4
+//#define TWI_CTRLA_SDAHOLD_Pos           2
+//#define TWI_CTRLA_FMPEN_Pos             1
+//#define TWI_MCTRLA_RIEN_Pos             7
+//#define TWI_MCTRLA_WIEN_Pos             6
+//#define TWI_MCTRLA_QCEN_Pos             4
+//#define TWI_MCTRLA_ENABLE_Pos           0
+//#define TWI_MCTRLB_ACKACT_Pos           2
+//#define TWI_MCTRLB_CMD_Pos              0
+//#define TWI_MSTATUS_BUSSTATE_Msk        0x3
+//#define TWI_MSTATUS_BUSSTATE_Pos        0
 
 #define MASTER_WRITE 0x0
 #define MASTER_READ 0x1
